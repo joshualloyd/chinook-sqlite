@@ -95,3 +95,45 @@ SELECT iv.InvoiceId, count(*) AS Line_Items
 FROM Invoice iv
 JOIN InvoiceLine il ON iv.InvoiceId = il.InvoiceId
 GROUP BY iv.InvoiceId;
+
+-- 17
+SELECT sum(iv.Total) AS 'Total Sales', e.FirstName || ' ' || e.LastName AS 'Sales Agent'
+FROM Invoice iv
+JOIN Customer c ON iv.CustomerId = c.CustomerId
+JOIN Employee e ON c.SupportRepId = e.EmployeeId
+GROUP BY c.SupportRepId;
+
+-- 18
+SELECT sum(iv.Total) AS 'Total Sales', e.FirstName || ' ' || e.LastName AS 'Sales Agent'
+FROM Invoice iv
+JOIN Customer c ON iv.CustomerId = c.CustomerId
+JOIN Employee e ON c.SupportRepId = e.EmployeeId
+WHERE iv.InvoiceDate LIKE '2009%'
+GROUP BY c.SupportRepId
+ORDER BY sum(iv.Total) DESC
+LIMIT 1;
+
+-- 19
+SELECT sum(iv.Total) AS 'Total Sales', e.FirstName || ' ' || e.LastName AS 'Sales Agent'
+FROM Invoice iv
+JOIN Customer c ON iv.CustomerId = c.CustomerId
+JOIN Employee e ON c.SupportRepId = e.EmployeeId
+WHERE iv.InvoiceDate LIKE '2010%'
+GROUP BY c.SupportRepId
+ORDER BY sum(iv.Total) DESC
+LIMIT 1;
+
+-- 20
+SELECT sum(iv.Total) AS 'Total Sales', e.FirstName || ' ' || e.LastName AS 'Sales Agent'
+FROM Invoice iv
+JOIN Customer c ON iv.CustomerId = c.CustomerId
+JOIN Employee e ON c.SupportRepId = e.EmployeeId
+GROUP BY c.SupportRepId
+ORDER BY sum(iv.Total) DESC
+LIMIT 1;
+
+-- 21
+SELECT count(*) AS 'Customers Assigned', e.FirstName || ' ' || e.LastName AS 'Sales Agent'
+FROM Customer c
+JOIN Employee e ON c.SupportRepId = e.EmployeeId
+GROUP BY c.SupportRepId;
