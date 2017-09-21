@@ -70,3 +70,28 @@ JOIN Track t ON i.TrackId = t.TrackId
 JOIN Album al ON t.AlbumId = al.AlbumId
 JOIN Artist ar ON al.ArtistId = ar.ArtistId
 GROUP BY t.Name;
+
+-- 13
+SELECT count(*) AS Invoice_Total, iv.BillingCountry
+FROM InvoiceLine il
+JOIN Invoice iv ON il.InvoiceId = iv.InvoiceId
+GROUP BY iv.BillingCountry;
+
+-- 14
+SELECT count(*) AS Total_Tracks, pl.Name AS Playlist_Name
+FROM Playlist pl
+JOIN PlaylistTrack pt ON pl.PlaylistId = pt.PlaylistId
+GROUP BY pl.Name;
+
+-- 15
+SELECT tr.Name AS Track_Name, al.Title AS Album_Title, mt.Name AS Media_Type, g.Name AS Genre_Name
+FROM Track tr
+JOIN Album al ON tr.AlbumId = al.AlbumId
+JOIN MediaType mt ON tr.MediaTypeId = mt.MediaTypeId
+JOIN Genre g ON tr.GenreId = g.GenreId;
+
+-- 16
+SELECT iv.InvoiceId, count(*) AS Line_Items
+FROM Invoice iv
+JOIN InvoiceLine il ON iv.InvoiceId = il.InvoiceId
+GROUP BY iv.InvoiceId;
