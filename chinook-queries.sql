@@ -137,3 +137,26 @@ SELECT count(*) AS 'Customers Assigned', e.FirstName || ' ' || e.LastName AS 'Sa
 FROM Customer c
 JOIN Employee e ON c.SupportRepId = e.EmployeeId
 GROUP BY c.SupportRepId;
+
+-- 22
+SELECT BillingCountry, sum(Total)
+FROM Invoice
+GROUP BY BillingCountry
+ORDER BY sum(Total) DESC;
+
+-- 23
+SELECT t.Name, count(il.Quantity), iv.InvoiceDate
+FROM Track t
+JOIN InvoiceLine il ON t.TrackId = il.TrackId
+JOIN Invoice iv ON il.InvoiceId = iv.InvoiceId
+WHERE iv.InvoiceDate LIKE '2013%'
+GROUP BY t.Name
+ORDER BY count(il.Quantity) DESC;
+
+-- 24
+SELECT t.Name, count(il.Quantity)
+FROM Track t
+JOIN InvoiceLine il ON t.TrackId = il.TrackId
+GROUP BY t.Name
+ORDER BY count(il.Quantity) DESC
+LIMIT 5;
